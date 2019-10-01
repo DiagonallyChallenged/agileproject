@@ -15,7 +15,17 @@ RSpec.describe GamesController, type: :controller do
       get :new
       expect(response).to have_http_status(:success)
     end
+  end
 
+  describe 'games#create action' do
+    it 'should successfully create a new gram in our database' do
+      post :create, params: { game: { name: 'Awesome!' } }
+      expect(response).to redirect_to root_path
+      #can change this line later. Just kept it simple
+
+      game = Game.last
+      expect(game.name).to eq('Awesome!')
+    end
   end
 
 end
