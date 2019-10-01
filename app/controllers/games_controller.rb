@@ -1,18 +1,19 @@
 class GamesController < ApplicationController
   # before_action :authenticate_user!, only: [:new, :create]
 
-
   def new
     @game = Game.new
   end
 
-  def index
-  end
+  def index; end
 
   def create
     @game = Game.create(game_params)
-    redirect_to root_path
-
+    if @game.valid?
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -20,6 +21,4 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:name)
   end
-
-
 end

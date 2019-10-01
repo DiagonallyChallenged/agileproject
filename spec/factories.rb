@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :game do
-    
   end
 
   factory :user do
