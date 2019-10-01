@@ -23,12 +23,14 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-
 gem 'bootstrap', '~> 4.3.1'
 
 gem 'jquery-rails'
 
 gem 'devise'
+
+gem 'rubocop', require: false
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
@@ -70,5 +72,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.5'
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
 end
