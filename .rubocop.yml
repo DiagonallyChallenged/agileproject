@@ -81,4 +81,15 @@ Style/SymbolArray:
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 130
+  Max: 154
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+
+# Offense count: 1
+# Cop supports --auto-correct.
+Style/BlockComments:
+  Exclude:
+    - 'spec/spec_helper.rb'
+
