@@ -5,4 +5,6 @@ class Game < ApplicationRecord
   belongs_to :winner, class_name: 'User', optional: true
 
   validates :name, presence: true
+
+  scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 end
