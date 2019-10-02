@@ -1,4 +1,9 @@
 FactoryBot.define do
+  factory :game do
+    name { 'Awesome!' }
+    association :user
+  end
+
   factory :user do
     sequence :email do |n|
       "dummyEmail#{n}@gmail.com"

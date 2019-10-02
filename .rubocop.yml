@@ -40,6 +40,10 @@ Style/ExpandPathArguments:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+Metrics/BlockLength:
+  Enabled: false
+
+
 # Offense count: 2
 Style/MixinUsage:
   Exclude:
@@ -81,7 +85,7 @@ Style/SymbolArray:
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
 Metrics/LineLength:
-  Max: 154
+  Enabled: false
 
 AllCops:
   Exclude:
