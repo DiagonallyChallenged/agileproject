@@ -1,0 +1,10 @@
+<h1>Hello Team - Let's Play Chess!</h1>
+
+<h1>Available Games that need a player:</h1>
+
+<% @games.each do |game| %>
+  <div>
+    <p><h1><%= game.name %></h1></p>
+  </div>
+
+<% end %>
