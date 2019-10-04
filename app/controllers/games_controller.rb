@@ -15,7 +15,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.create(game_params)
     if @game.valid?
-      redirect_to root_path
+      redirect_to game_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:name, :white_player_id, :black_player_id)
   end
 
   def render_not_found(status = :not_found)
