@@ -35,4 +35,10 @@ class Game < ApplicationRecord
     create_type(4, Queen)
     create_type(5, King)
   end
+
+  def check_space(x, y)
+    if self.pieces.where(["x_location = ? and y_location = ?", x, y])
+      return true
+    end
+  end
 end
