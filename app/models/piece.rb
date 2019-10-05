@@ -8,10 +8,10 @@ class Piece < ApplicationRecord
 
     if x_current == x_destination # horizontal
       y_low, y_high = [y_current, y_destination].sort
-      (y_low + 1).upto(y_high - 1) { |x| self.game.check_space(x_low, y) }
-    elsif y_begin == y_high # vertical
+      (y_low + 1).upto(y_high - 1) { |y| self.game.check_space(x_current, y) }
+    elsif y_current == y_destination # vertical
       x_low, x_high = [x_current, x_destination].sort
-      (x_low + 1).upto(x_high - 1) { |x| self.game.check_space(x, y_low) }
+      (x_low + 1).upto(x_high - 1) { |x| self.game.check_space(x, y_current) }
     elsif (x_current - x_destination).abs == (y_current - y_destination).abs #diagonal
       if x_current > x_destination && y_current > y_destination # down/left
         while x_current > x_destination && y_current > y_destination
@@ -41,5 +41,7 @@ class Piece < ApplicationRecord
     else
       return 'Move not valid' # Invalid move. Change this to raise an error?
     end
+
+    return false # This should return if NOT obstructed (clear path)
   end
 end
