@@ -7,4 +7,10 @@ class Game < ApplicationRecord
   validates :name, presence: true
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
+
+  def check_space(x, y)
+    if self.pieces.where(["x_location = ? and y_location = ?", x, y])
+      return true
+    end
+  end
 end
