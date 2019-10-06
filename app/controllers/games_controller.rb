@@ -11,6 +11,12 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find_by_id(params[:id])
+
+    # @pieces = [
+    #     {player_id: 2, pos_x: 3, pos_y: 3, type: "king", active: true},
+    #     {player_id: 2, pos_x: 8, pos_y: 8, type: "queen", active: true},
+    # ]
+
     return render_not_found if @game.blank?
   end
 

@@ -90,6 +90,7 @@ Metrics/LineLength:
 AllCops:
   Exclude:
     - 'db/**/*'
+    - 'app/helpers/games_helper.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
