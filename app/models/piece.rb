@@ -3,8 +3,8 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def obstructed?(x_destination, y_destination)
-    x_current = self.x_location
-    y_current = self.y_location
+    x_current = x_location
+    y_current = y_location
 
     space_status = []
 
