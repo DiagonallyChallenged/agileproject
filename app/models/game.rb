@@ -39,7 +39,9 @@ class Game < ApplicationRecord
   def check_space(x, y)
     # May change depending on what happens to captured pieces.  May need to add active
     if self.pieces.where(["x_location = ? and y_location = ?", x, y]).count >= 1
-      return true
+      true
+    else
+      false
     end
   end
 end
