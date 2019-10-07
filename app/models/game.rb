@@ -8,12 +8,8 @@ class Game < ApplicationRecord
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
-  def check_space(x, y)
+  def check_space(x_location, y_location)
     # May change depending on what happens to captured pieces.  May need to add active
-    if self.pieces.where(["x_location = ? and y_location = ?", x, y]).count >= 1
-      true
-    else
-      false
-    end
+    pieces.where(['x_location = ? and y_location = ?', x_location, y_location]).count >= 1
   end
 end
