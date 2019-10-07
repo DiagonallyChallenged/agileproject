@@ -36,8 +36,7 @@ class Game < ApplicationRecord
     create_type(5, King)
   end
 
-  def check_space(x_location, y_location)
-    # May change depending on what happens to captured pieces.  May need to add active
-    pieces.where(['x_location = ? and y_location = ?', x_location, y_location]).count >= 1
+  def space_occupied?(x_location, y_location)
+    pieces.where(x_location: x_location, y_location: y_location).present? ? true : false
   end
 end
