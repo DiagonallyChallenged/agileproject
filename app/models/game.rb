@@ -7,4 +7,7 @@ class Game < ApplicationRecord
   validates :name, presence: true
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
+
+  def populate_game
+  end
 end
