@@ -37,6 +37,6 @@ class Game < ApplicationRecord
   end
 
   def space_occupied?(x_location, y_location)
-    pieces.where(x_location: x_location, y_location: y_location).present? ? true : false
+    pieces.where(x_location: x_location, y_location: y_location, active: true).present? ? true : false
   end
 end
