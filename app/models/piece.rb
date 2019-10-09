@@ -1,6 +1,8 @@
 class Piece < ApplicationRecord
   belongs_to :user
   belongs_to :game
+  alias_attribute :x, :x_location
+  alias_attribute :y, :y_location
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
     if y_current == y_destination # horizontal
