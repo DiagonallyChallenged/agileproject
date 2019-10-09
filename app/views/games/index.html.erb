@@ -3,8 +3,14 @@
 <h1>Available Games that need a player:</h1>
 
 <% @games.each do |game| %>
-  <div>
-    <p><h1><%= game.name %></h1></p>
-  </div>
+  <div class="container">
+    <div class ='row'>
+      <p><h1><%= game.name %></h1></p>
+        <div class="col-sm-4 col-12 text-center">
 
+          <%= link_to 'Play Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
+
+    </div>
+  </div>
+  </div>
 <% end %>

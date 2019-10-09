@@ -1,0 +1,2 @@
+module GamejoinHelper
+end
