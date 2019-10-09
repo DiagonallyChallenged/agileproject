@@ -11,5 +11,4 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe GamejoinHelper, type: :helper do
-
 end

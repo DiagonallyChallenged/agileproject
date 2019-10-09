@@ -14,8 +14,5 @@ class Game < ApplicationRecord
     self.black_player = user
   end
 
-  def game_started?
-
-  end
-
+  def game_started?; end
 end
