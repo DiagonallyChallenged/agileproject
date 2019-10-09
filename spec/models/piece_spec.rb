@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Piece, type: :model do
-  
   describe '.movement_direction' do
-    subject(:instance) {Piece.new}
+    subject(:instance) { Piece.new }
 
     it 'should return horizontal if movement is horizontal' do
       result = instance.movement_direction(1, 3, 3, 3)
@@ -51,7 +50,6 @@ RSpec.describe Piece, type: :model do
   end
 
   describe '.diagonal_obstruction?' do
-
     it 'should return true if there is piece in the path' do
       game = FactoryBot.create(:game)
       user = FactoryBot.create(:user)
@@ -90,7 +88,7 @@ RSpec.describe Piece, type: :model do
       piece1 = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 1, game_id: game.id, user_id: user.id)
       FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 1, game_id: game.id, user_id: user.id)
 
-      result = piece1.obstructed?(piece1.x_location, piece1.y_location, 5, 1) 
+      result = piece1.obstructed?(piece1.x_location, piece1.y_location, 5, 1)
       expect(result).to be true
     end
 
