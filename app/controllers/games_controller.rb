@@ -10,7 +10,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
+    @game = Game.find_by_id(params[:id])
 
     # @pieces = [
     #     {player_id: 2, pos_x: 3, pos_y: 3, type: "king", active: true},
