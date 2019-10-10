@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :show]
+  before_action :authenticate_user!, only: [:new, :create, :show, :update]
 
   def new
     @game = Game.new
@@ -30,10 +30,17 @@ class GamesController < ApplicationController
     end
   end
 
+  def update
+    game = Game.find(params[:id])
+    game.join_game(current_user)
+    game.save
+    redirect_to game_path game
+  end
+
   private
 
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:name, :black_player, :white_player)
   end
 
   def render_not_found(status = :not_found)

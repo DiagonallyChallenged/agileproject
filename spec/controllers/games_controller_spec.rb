@@ -75,4 +75,16 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to have_http_status(:found)
     end
   end
+
+  describe 'game#update action' do
+    it 'should allow users to join a game ' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      sign_in user
+
+      put :update, params: { id: game.id }
+
+      expect(response).to redirect_to game_path
+    end
+  end
 end
