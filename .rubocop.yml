@@ -98,3 +98,19 @@ Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
 
+# Turned off these checks for piece model until methods are refactored
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'app/models/piece.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'app/models/piece.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'app/models/piece.rb'
+
+Metrics/AbcSize:
+  Exclude:
+    - 'app/models/piece.rb'
