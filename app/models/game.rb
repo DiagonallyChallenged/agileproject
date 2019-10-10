@@ -8,7 +8,6 @@ class Game < ApplicationRecord
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
-
   attr_accessor :black_player_id
 
   def join_game(user)
@@ -54,5 +53,4 @@ class Game < ApplicationRecord
   def space_occupied?(x_location, y_location)
     pieces.where(x_location: x_location, y_location: y_location, active: true).present? ? true : false
   end
-
 end
