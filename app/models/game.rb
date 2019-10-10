@@ -35,4 +35,8 @@ class Game < ApplicationRecord
     create_type(4, Queen)
     create_type(5, King)
   end
+
+  def space_occupied?(x_location, y_location)
+    pieces.where(x_location: x_location, y_location: y_location, active: true).present? ? true : false
+  end
 end
