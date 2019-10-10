@@ -14,5 +14,11 @@ class Game < ApplicationRecord
     self.black_player = user
   end
 
-  def game_started?; end
-end
+  def joined?(user)
+    self.black_player == user || self.white_player == user
+  end
+
+
+
+  end
+

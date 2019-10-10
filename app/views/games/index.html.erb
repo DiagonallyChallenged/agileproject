@@ -5,14 +5,20 @@
 <% @games.each do |game| %>
   <div class="container">
     <div class ='row'>
-      <p><h1><%= game.name %></h1></p>
-        <div class="col-sm-4 col-12 text-center">
+      <div class="col-sm-4 col-12 text-center">
 
-<!--          Need to create a way for link to change if you are playing-->
+        <p><h1><%= game.name %></h1></p>
 
-          <%= link_to 'Play Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
 
-    </div>
+          <% if game.joined? (current_user) %>
+            <%= link_to "You're in, Let's Play!", game_path(game), class: 'btn btn-secondary btn-large'%>
+
+          <% else %>
+
+          <%= link_to 'Join a Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
+          <% end %>
+
+        </div>
   </div>
   </div>
 <% end %>
