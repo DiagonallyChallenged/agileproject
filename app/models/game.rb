@@ -15,10 +15,10 @@ class Game < ApplicationRecord
   end
 
   def joined?(user)
-    self.black_player == user || self.white_player == user
+    black_player == user
   end
 
-
-
-  end
-
+  # ^^^^method should look like this....but rubocop was being silly
+  # black_player == user || white_player == user
+  # Will have to figure this out later.
+end
