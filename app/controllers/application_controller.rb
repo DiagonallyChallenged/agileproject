@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   private
 
   def render_not_found(status = :not_found)
