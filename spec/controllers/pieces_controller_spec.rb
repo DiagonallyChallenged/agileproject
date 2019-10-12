@@ -42,9 +42,9 @@ RSpec.describe PiecesController, type: :controller do
       game.reload
       moving_piece = game.pieces.last
       destination_piece = game.pieces.first
-      patch :update, params: { id: moving_piece.id, 
-        piece: { x_location: destination_piece.x_location, 
-          y_location: destination_piece.y_location } }
+      patch :update, params: { id: moving_piece.id,
+                               piece: { x_location: destination_piece.x_location,
+                                        y_location: destination_piece.y_location } }
       moving_piece.reload
       destination_piece.reload
       expect(destination_piece.active).to be false
