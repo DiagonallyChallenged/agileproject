@@ -8,9 +8,6 @@ class PiecesController < ApplicationController
     @piece = Piece.find_by_id(params[:id])
     return render_not_found if @piece.blank?
 
-    removed_piece = Piece.find_by(pieces_params, game_id: @piece.game.id)
-    removed_piece&.deactivate!
-
     @piece.update_attributes(pieces_params)
   end
 

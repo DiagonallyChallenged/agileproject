@@ -63,8 +63,4 @@ class Piece < ApplicationRecord
     end
     false
   end
-
-  def deactivate!
-    update(active: false)
-  end
 end

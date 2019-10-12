@@ -35,21 +35,5 @@ RSpec.describe PiecesController, type: :controller do
       patch :update, params: { id: 'FAKE_ID' }
       expect(response).to have_http_status(:not_found)
     end
-
-    it 'should deactivate pieces on the destination square' do
-      game = Game.create(name: 'New Game')
-      game.populate_game
-      game.reload
-      moving_piece = game.pieces.last
-      destination_piece = game.pieces.first
-      patch :update, params: { id: moving_piece.id,
-                               piece: { x_location: destination_piece.x_location,
-                                        y_location: destination_piece.y_location } }
-      moving_piece.reload
-      destination_piece.reload
-      expect(destination_piece.active).to be false
-      expect(moving_piece.x_location).to eq(destination_piece.x_location)
-      expect(moving_piece.y_location).to eq(destination_piece.y_location)
-    end
   end
 end
