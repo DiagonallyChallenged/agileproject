@@ -8,7 +8,7 @@
       <div class="board-row board-row-<%= y %>">
         <% (1..8).each do |x| %>
           <div class="square square-<%= black_or_white(x, y) %>">
-            <%#= print_piece(@pieces, x, y) %>
+            <%= render_piece(@game.pieces, x, y) %>
           </div>
         <% end %>
       </div>

@@ -54,4 +54,12 @@ RSpec.describe Game, type: :model do
       expect(game.space_occupied?(3, 3)).to be false
     end
   end
+
+  describe 'populate_game method' do
+    it 'should populate a board when a game is joined' do
+      game = FactoryBot.create(:game)
+      game.populate_game
+      expect(game.pieces.count).to eq(32)
+    end
+  end
 end

@@ -1,10 +1,10 @@
 module GamesHelper
-  # def print_piece(pieces, x, y)
-  #   piece = pieces.find { |pc| pc[:pos_x] == x and pc[:pos_y] == y }
-  #   if piece
-  #     piece[:type]
-  #   end
-  # end
+  def render_piece(pieces, x, y)
+    piece = pieces.find { |pc| pc[:x_location] == x and pc[:y_location] == y }
+    if piece
+      piece[:type]
+    end
+  end
 
   def black_or_white(x, y)
     if y.odd?
