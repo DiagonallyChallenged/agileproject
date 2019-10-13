@@ -18,6 +18,7 @@ class GamesController < ApplicationController
     # ]
 
     return render_not_found if @game.blank?
+
     @pieces = @game.pieces
   end
 
