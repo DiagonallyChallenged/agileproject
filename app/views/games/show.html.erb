@@ -8,7 +8,11 @@
       <div class="board-row board-row-<%= y %>">
         <% (1..8).each do |x| %>
           <div class="square square-<%= black_or_white(x, y) %>">
-            <%#= print_piece(@pieces, x, y) %>
+            <% @pieces.each do |piece| %>
+              <% if piece.x_location == x && piece.y_location == y %>
+                <%= link_to piece.type, piece_path(piece) %>
+              <% end %>
+            <% end %>
           </div>
         <% end %>
       </div>

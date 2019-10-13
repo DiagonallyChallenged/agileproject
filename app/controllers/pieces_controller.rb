@@ -9,6 +9,7 @@ class PiecesController < ApplicationController
     return render_not_found if @piece.blank?
 
     @piece.update_attributes(pieces_params)
+    redirect_to piece_path(@piece) #may eventually be removed
   end
 
   private
