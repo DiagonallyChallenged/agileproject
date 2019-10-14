@@ -1,6 +1,30 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
+
+describe 'available game scope' do
+
+  let(:black_player) {FactoryBot.create(:user)}
+  let(:white_player) {FactoryBot.create(:user)}
+
+  let!(:white_player_null) { FactoryBot.create(:game, black_player_id: black_player.id) }
+  let!(:black_player_null) { FactoryBot.create(:game, white_player_id: white_player.id) }
+  let!(:neither_player_null) {FactoryBot.create(:game, black_player_id: black_player.id, white_player_id: white_player.id)}
+
+  it 'should return games where black_player_id is null' do
+    expect(Game.available).to include(black_player_null)
+  end
+
+  it 'should return games where white_player_id is null' do
+    expect(Game.available).to include(white_player_null)
+  end
+
+  #it 'should not return games where neither id is null' do
+   # expect(Game.available).not_to include(neither_player_null)
+  #end
+
+  end
+
   describe '.create_pawns' do
     it 'should only create 16 pawns' do
       game = FactoryBot.create(:game)
