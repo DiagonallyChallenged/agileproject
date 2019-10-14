@@ -1,0 +1,26 @@
+<h1><%= @piece.type %></h1>
+<p><%= @piece.x_location %>, <%= @piece.y_location %></p>
+
+<div class="container">
+  <div class="board">
+    <% (1..8).each do |y| %>
+      <div class="board-row board-row-<%= y %>">
+        <% (1..8).each do |x| %>
+          <% if @piece.x_location == x && @piece.y_location == y %>
+            <div class="square square-highlight %>">
+              <%= @piece.type %>
+            </div>
+          <% else %>
+            <div class="square square-<%= black_or_white(x, y) %>">
+              <%= form_for piece_path(@piece), method: :put do %>
+                <%= hidden_field_tag :x_location, x %>
+                <%= hidden_field_tag :y_location, y %>
+                <%= submit_tag 'Move' %>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

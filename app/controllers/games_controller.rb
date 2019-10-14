@@ -12,6 +12,8 @@ class GamesController < ApplicationController
   def show
     @game = Game.find_by_id(params[:id])
     return render_not_found if @game.blank?
+
+    @pieces = @game.pieces
   end
 
   def create
@@ -35,9 +37,5 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name, :black_player, :white_player)
-  end
-
-  def render_not_found(status = :not_found)
-    render plain: "#{status.to_s.titleize} :(", status: status
   end
 end
