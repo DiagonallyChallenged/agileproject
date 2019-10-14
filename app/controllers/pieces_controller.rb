@@ -14,6 +14,6 @@ class PiecesController < ApplicationController
   private
 
   def pieces_params
-    params.require(:piece).permit(:x_location, :y_location)
+    params.permit(:x_location, :y_location)
   end
 end

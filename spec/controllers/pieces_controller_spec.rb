@@ -25,7 +25,7 @@ RSpec.describe PiecesController, type: :controller do
       piece = game.pieces.last
       new_x_location = piece.x_location + 1
       new_y_location = piece.y_location + 1
-      patch :update, params: { id: piece.id, piece: { x_location: new_x_location, y_location: new_y_location } }
+      patch :update, params: { id: piece.id, x_location: new_x_location, y_location: new_y_location }
       piece.reload
       expect(piece.x_location).to eq(new_x_location)
       expect(piece.y_location).to eq(new_y_location)
