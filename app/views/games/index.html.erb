@@ -9,19 +9,15 @@
   <div class="container">
     <div class ='row'>
       <div class="col-sm-4 col-12 text-center">
-
-        <p><h1><%= game.name %></h1></p>
-
-
-          <% if game.joined? (current_user) %>
-            <%= link_to "You're in, Let's Play!", game_path(game), class: 'btn btn-secondary btn-large'%>
-
-          <% else %>
-
+        <p>
+          <h1><%= game.name %></h1>
+        </p>
+        <% if current_user && game.joined?(current_user) %>
+          <%= link_to "You're in, Let's Play!", game_path(game), class: 'btn btn-secondary btn-large'%>
+        <% else %>
           <%= link_to 'Join a Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
-          <% end %>
-
-        </div>
-  </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 <% end %>

@@ -8,14 +8,18 @@ class Game < ApplicationRecord
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
-  attr_accessor :black_player_id
+  attr_accessor :black_player_id, :white_player_id
 
-  def join_game(user)
-    self.black_player = user
+  def join_game(user, color)
+    if color == 'white'
+      self.white_player = user
+    elsif color == 'black'
+      self.black_player = user
+    end
   end
 
   def joined?(user)
-    black_player == user
+    black_player == user or white_player == user
   end
 
   # ^^^^method should look like this....but rubocop was being silly

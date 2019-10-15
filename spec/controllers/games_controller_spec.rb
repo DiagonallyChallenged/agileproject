@@ -31,17 +31,17 @@ RSpec.describe GamesController, type: :controller do
     end
     # code can be used for validation
 
-    it 'should successfully create a new gram in our database' do
+    it 'should successfully create a new game in our database' do
       user = FactoryBot.create(:user)
       sign_in user
 
-      post :create, params: { game: { name: 'Awesome!' } }
+      post :create, params: { game: { name: 'Awesome!'} }
       expect(response).to redirect_to root_path
       # can change this line later. Just kept it simple
 
       game = Game.last
       expect(game.name).to eq('Awesome!')
-      # expect(game.user).to eq(user)
+      expect(game.white_player).to eq(user)
     end
 
     it 'should properly deal with validation errors' do
@@ -83,8 +83,9 @@ RSpec.describe GamesController, type: :controller do
       sign_in user
 
       put :update, params: { id: game.id }
+      game.reload
 
-      expect(response).to redirect_to game_path
+      expect(game.black_player).to eq(user)
     end
   end
 end

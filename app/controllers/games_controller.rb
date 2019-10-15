@@ -18,7 +18,9 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
+    @game.join_game(current_user, 'white')
     if @game.valid?
+      @game.save
       @game.populate_game
       redirect_to root_path
     else
@@ -28,7 +30,7 @@ class GamesController < ApplicationController
 
   def update
     game = Game.find(params[:id])
-    game.join_game(current_user)
+    game.join_game(current_user, 'black')
     game.save
     redirect_to game_path game
   end
