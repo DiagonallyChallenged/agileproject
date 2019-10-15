@@ -32,8 +32,9 @@ class Game < ApplicationRecord
   end
 
   def create_pawns
-    (1..8).each do |x_location|
-      create_type(x_location, Pawn)
+    (1..8).each do |pawn|
+      Piece.create(x_location: pawn, y_location: 2, type: Pawn, game: self)
+      Piece.create(x_location: pawn, y_location: 7, type: Pawn, game: self)
     end
   end
 
