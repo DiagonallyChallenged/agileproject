@@ -35,7 +35,7 @@ RSpec.describe GamesController, type: :controller do
       user = FactoryBot.create(:user)
       sign_in user
 
-      post :create, params: { game: { name: 'Awesome!'} }
+      post :create, params: { game: { name: 'Awesome!' } }
       expect(response).to redirect_to root_path
       # can change this line later. Just kept it simple
 
