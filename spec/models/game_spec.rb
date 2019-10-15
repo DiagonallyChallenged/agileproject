@@ -60,7 +60,7 @@ RSpec.describe Game, type: :model do
       game = FactoryBot.create(:game)
 
       join_status = game.joined?(game.white_player)
-      expect(join_status).to be true 
+      expect(join_status).to be true
     end
 
     it 'should return true if current user is the black player' do
@@ -70,7 +70,7 @@ RSpec.describe Game, type: :model do
       game.save
 
       join_status = game.joined?(game.black_player)
-      expect(join_status).to be true 
+      expect(join_status).to be true
     end
 
     it 'should return false if a user is not in the game' do
@@ -78,7 +78,7 @@ RSpec.describe Game, type: :model do
       game = FactoryBot.create(:game)
 
       join_status = game.joined?(user)
-      expect(join_status).to be false 
+      expect(join_status).to be false
     end
   end
 

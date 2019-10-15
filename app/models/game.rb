@@ -19,16 +19,12 @@ class Game < ApplicationRecord
   end
 
   def joined?(user)
-    if black_player == user || white_player == user
+    if [black_player, white_player].include?(user)
       true
     else
       false
     end
   end
-
-  # ^^^^method should look like this....but rubocop was being silly
-  # black_player == user || white_player == user
-  # Will have to figure this out later.
 
   def populate_game
     create_pawns
