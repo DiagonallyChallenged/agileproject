@@ -4,7 +4,7 @@ FactoryBot.define do
 
   factory :game do
     name { 'Awesome!' }
-    # association :user
+    association :white_player, factory: :user
   end
 
   factory :user do

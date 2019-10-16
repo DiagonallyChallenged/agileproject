@@ -55,6 +55,33 @@ RSpec.describe Game, type: :model do
     end
   end
 
+  describe '.joined?' do
+    it 'should return true if current user is the white player' do
+      game = FactoryBot.create(:game)
+
+      join_status = game.joined?(game.white_player)
+      expect(join_status).to be true
+    end
+
+    it 'should return true if current user is the black player' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+      game.save
+
+      join_status = game.joined?(game.black_player)
+      expect(join_status).to be true
+    end
+
+    it 'should return false if a user is not in the game' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+
+      join_status = game.joined?(user)
+      expect(join_status).to be false
+    end
+  end
+
   describe 'populate_game method' do
     it 'should populate a board when a game is joined' do
       game = FactoryBot.create(:game)

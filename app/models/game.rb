@@ -8,19 +8,23 @@ class Game < ApplicationRecord
 
   scope :available, -> { where('black_player_id IS NULL OR white_player_id IS NULL') }
 
-  attr_accessor :black_player_id
+  attr_accessor :black_player_id, :white_player_id
 
-  def join_game(user)
-    self.black_player = user
+  def join_game(user, color)
+    if color == 'white'
+      self.white_player = user
+    elsif color == 'black'
+      self.black_player = user
+    end
   end
 
   def joined?(user)
-    black_player == user
+    if [black_player, white_player].include?(user)
+      true
+    else
+      false
+    end
   end
-
-  # ^^^^method should look like this....but rubocop was being silly
-  # black_player == user || white_player == user
-  # Will have to figure this out later.
 
   def populate_game
     create_pawns
@@ -29,14 +33,14 @@ class Game < ApplicationRecord
 
   def create_pawns
     (1..8).each do |pawn|
-      Piece.create(x_location: pawn, y_location: 2, type: Pawn, game: self)
-      Piece.create(x_location: pawn, y_location: 7, type: Pawn, game: self)
+      Piece.create(x_location: pawn, y_location: 2, type: Pawn, game: self, user: white_player)
+      Piece.create(x_location: pawn, y_location: 7, type: Pawn, game: self, user: black_player)
     end
   end
 
   def create_type(x_location, type)
-    Piece.create(x_location: x_location, y_location: 1, type: type, game: self)
-    Piece.create(x_location: x_location, y_location: 8, type: type, game: self)
+    Piece.create(x_location: x_location, y_location: 1, type: type, game: self, user: white_player)
+    Piece.create(x_location: x_location, y_location: 8, type: type, game: self, user: black_player)
   end
 
   def create_major_pieces
