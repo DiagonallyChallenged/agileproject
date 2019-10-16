@@ -52,15 +52,6 @@ RSpec.describe GamesController, type: :controller do
       post :create, params: { game: { name: '' } }
       expect(response).to have_http_status(:unprocessable_entity)
     end
-
-    it 'should populate a new game' do
-      user = FactoryBot.create(:user)
-      sign_in user
-
-      post :create, params: { game: { name: 'New Game' } }
-      game = Game.last
-      expect(game.pieces.count).to eq(32)
-    end
   end
 
   describe 'game#show action' do
@@ -86,6 +77,22 @@ RSpec.describe GamesController, type: :controller do
       game.reload
 
       expect(game.black_player).to eq(user)
+    end
+
+    it 'should populate a game' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      sign_in user
+
+      put :update, params: { id: game.id }
+      game.reload
+
+      white_player = game.white_player
+      black_player = game.black_player
+
+      expect(black_player.pieces.count).to eq(16)
+      expect(white_player.pieces.count).to eq(16)
+      expect(game.pieces.count).to eq(32)
     end
   end
 end

@@ -21,7 +21,6 @@ class GamesController < ApplicationController
     @game.join_game(current_user, 'white')
     if @game.valid?
       @game.save
-      @game.populate_game
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
@@ -32,6 +31,7 @@ class GamesController < ApplicationController
     game = Game.find(params[:id])
     game.join_game(current_user, 'black')
     game.save
+    game.populate_game
     redirect_to game_path game
   end
 
