@@ -33,14 +33,14 @@ class Game < ApplicationRecord
 
   def create_pawns
     (1..8).each do |pawn|
-      Piece.create(x_location: pawn, y_location: 2, type: Pawn, game: self, user: self.white_player)
-      Piece.create(x_location: pawn, y_location: 7, type: Pawn, game: self, user: self.black_player)
+      Piece.create(x_location: pawn, y_location: 2, type: Pawn, game: self, user: white_player)
+      Piece.create(x_location: pawn, y_location: 7, type: Pawn, game: self, user: black_player)
     end
   end
 
   def create_type(x_location, type)
-    Piece.create(x_location: x_location, y_location: 1, type: type, game: self, user: self.white_player)
-    Piece.create(x_location: x_location, y_location: 8, type: type, game: self, user: self.black_player)
+    Piece.create(x_location: x_location, y_location: 1, type: type, game: self, user: white_player)
+    Piece.create(x_location: x_location, y_location: 8, type: type, game: self, user: black_player)
   end
 
   def create_major_pieces
