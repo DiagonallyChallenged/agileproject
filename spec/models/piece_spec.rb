@@ -78,7 +78,7 @@ RSpec.describe Piece, type: :model do
       piece1 = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 1, game_id: game.id, user_id: user.id)
       FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 3, game_id: game.id, user_id: user.id)
 
-      result = piece1.obstructed?(piece1.x_location, piece1.y_location, 1, 5)
+      result = piece1.obstructed?(1, 5)
       expect(result).to be false
     end
 
@@ -88,7 +88,7 @@ RSpec.describe Piece, type: :model do
       piece1 = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 1, game_id: game.id, user_id: user.id)
       FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 1, game_id: game.id, user_id: user.id)
 
-      result = piece1.obstructed?(piece1.x_location, piece1.y_location, 5, 1)
+      result = piece1.obstructed?(5, 1)
       expect(result).to be true
     end
 
@@ -98,7 +98,7 @@ RSpec.describe Piece, type: :model do
       piece1 = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 5, game_id: game.id, user_id: user.id)
       FactoryBot.create(:piece, id: 2, x_location: 1, y_location: 3, game_id: game.id, user_id: user.id)
 
-      expect(piece1.obstructed?(1, 5, 1, 1)).to be true
+      expect(piece1.obstructed?(1, 1)).to be true
     end
 
     it 'should return true for diagonal obstructions' do
@@ -107,7 +107,7 @@ RSpec.describe Piece, type: :model do
       piece1 = FactoryBot.create(:piece, id: 1, x_location: 2, y_location: 4, game_id: game.id, user_id: user.id)
       FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 3, game_id: game.id, user_id: user.id)
 
-      expect(piece1.obstructed?(2, 4, 5, 1)).to be true
+      expect(piece1.obstructed?(5, 1)).to be true
     end
   end
 end
