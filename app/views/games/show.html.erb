@@ -9,7 +9,7 @@
         <% (1..8).each do |x| %>
           <div class="square square-<%= black_or_white(x, y) %>">
             <% @pieces.each do |piece| %>
-              <% if piece.x_location == x && piece.y_location == y %>
+              <% if piece.x_location == x && piece.y_location == y && piece.active %>
                 <%= link_to piece.type, piece_path(piece) %>
               <% end %>
             <% end %>
