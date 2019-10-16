@@ -4,6 +4,16 @@ class Piece < ApplicationRecord
   alias_attribute :x, :x_location
   alias_attribute :y, :y_location
 
+  def move_to!(new_x, new_y)
+    game.space_occupied?(new_x, new_y)
+  #color of piece that were moving and color of piece in destination 
+  piece.color
+  
+  piece.userid = game.white_player vs game.black_player  
+
+
+  end
+
   def movement_direction(x_current, y_current, x_destination, y_destination)
     if y_current == y_destination # horizontal
       'horizontal'
