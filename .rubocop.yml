@@ -103,10 +103,6 @@ Metrics/PerceivedComplexity:
   Exclude:
     - 'app/models/piece.rb'
 
-Metrics/MethodLength:
-  Exclude:
-    - 'app/models/piece.rb'
-
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/models/piece.rb'

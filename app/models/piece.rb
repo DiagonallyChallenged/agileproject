@@ -64,11 +64,8 @@ class Piece < ApplicationRecord
   end
 
   def obstructed?(x_destination, y_destination)
-    x_current = x_location
-    y_current = y_location
-
-    direction = movement_direction(x_current, y_current, x_destination, y_destination)
-    return true if check_direction_obstructions(direction, x_current, y_current, x_destination, y_destination)
+    direction = movement_direction(x_location, y_location, x_destination, y_destination)
+    return true if check_direction_obstructions(direction, x_location, y_location, x_destination, y_destination)
 
     false
   end
