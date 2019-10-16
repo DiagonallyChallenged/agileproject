@@ -50,8 +50,8 @@ class Piece < ApplicationRecord
     false
   end
 
-  def obstructed?(x_current, y_current, x_destination, y_destination)
-    case movement_direction(x_current, y_current, x_destination, y_destination)
+  def check_direction_obstructions(direction, x_current, y_current, x_destination, y_destination)
+    case direction
     when 'horizontal'
       return true if horizontal_obstruction?(x_current, x_destination, y_current)
     when 'vertical'
@@ -61,6 +61,12 @@ class Piece < ApplicationRecord
     else
       raise 'Invalid Move'
     end
+  end
+
+  def obstructed?(x_current, y_current, x_destination, y_destination)
+    direction = movement_direction(x_current, y_current, x_destination, y_destination)
+    return true if check_direction_obstructions(direction, x_current, y_current, x_destination, y_destination)
+
     false
   end
 end
