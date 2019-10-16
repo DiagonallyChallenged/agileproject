@@ -25,6 +25,18 @@ RSpec.describe Piece, type: :model do
     end
   end
 
+  describe 'move_to!' do
+    it 'should return true if there is piece in the path' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      piece = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 2, game_id: game.id, user_id: user.id)
+      FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 2, game_id: game.id, user_id: user.id)
+
+      result = piece.move_to!(1, 2)
+      expect(result).to be true
+    end
+  end
+
   describe '.horizontal_obstruction?' do
     it 'should return true if there is piece in the path' do
       game = FactoryBot.create(:game)
