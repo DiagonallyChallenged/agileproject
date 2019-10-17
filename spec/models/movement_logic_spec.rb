@@ -21,7 +21,8 @@ RSpec.describe 'movement logic' do
 		end
 
 		it 'should be able to move diagonally' do
-			piece = Piece.create(x: 5, y: 1, type: 'King')
+			game = Game.create
+			piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
 			new_location = {
 				x: piece.x + 1,
 				y: piece.y + 1
