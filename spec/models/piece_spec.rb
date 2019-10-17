@@ -25,15 +25,26 @@ RSpec.describe Piece, type: :model do
     end
   end
 
-  describe 'move_to!' do
-    it 'should return true if there is piece in the path' do
+   describe 'capture_piece!' do
+    it 'should deactive captured piece' do
       game = FactoryBot.create(:game)
       user = FactoryBot.create(:user)
       piece = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 2, game_id: game.id, user_id: user.id)
-      FactoryBot.create(:piece, id: 2, x_location: 3, y_location: 2, game_id: game.id, user_id: user.id)
+      piece.capture_piece!
 
-      result = piece.move_to!(1, 2)
-      expect(result).to be true
+      expect(piece.active).to be false
+    end
+  end
+
+  describe 'update_piece_location!' do
+    it 'should update piece location' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      piece = FactoryBot.create(:piece, id: 1, x_location: 1, y_location: 2, game_id: game.id, user_id: user.id)
+      piece.update_piece_location!(2, 4)
+
+      expect(piece.x_location).to eq(2) 
+      expect(piece.y_location).to eq(4)
     end
   end
 

@@ -4,14 +4,28 @@ class Piece < ApplicationRecord
   alias_attribute :x, :x_location
   alias_attribute :y, :y_location
 
-  def move_to!(new_x, new_y)
-    game.space_occupied?(new_x, new_y)
-  #color of piece that were moving and color of piece in destination 
-  piece.color
-  
-  piece.userid = game.white_player vs game.black_player  
 
+  def capture_piece! 
+    update_attributes({x_location: nil, y_location: nil, active: false})
+  end 
 
+  def update_piece_location!(new_x, new_y) 
+    self.update_attributes({x_location: new_x, y_location: new_y})
+  end 
+
+  def move_to!(new_x, new_y) 
+    if game.space_occupied?(new_x, new_y) 
+      piece_at_destination = game.pieces.find_by(x_location: new_x, y_location: new_y)
+      if piece_at_destination.user != self.user 
+        piece_at_destination.capture_piece!
+        update_piece_location!(new_x, new_y)
+      else  
+        raise 'Invalid Move'       
+      end  
+
+    else  
+      update_piece_location!(new_x, new_y)
+    end 
   end
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
