@@ -6,13 +6,13 @@ class King < Piece
 			y: y,
 		}
 
-		( one_square_forward?(location) && empty_square?(location) ) || \
-		( diagonal_move?(location) && enemy_occupied_square?(location) )
+		( one_square_forward_or_backwards?(location) && empty_square?(location) ) || \
+		( diagonal_move?(location) && horizontal_move?(location) )
 	end
 
-	def one_square_forward?(location)
-		location[:y] == self.y + 1 &&
-		location[:x] == self.x 
+	def one_square_forward_or_backwards?(location)
+    ( location[:y].in?([ self.y + 1, self.y - 1]) ) &&
+		( location[:x] == self.x )
 	end
 
 
@@ -21,8 +21,14 @@ class King < Piece
 	end
 
 	def diagonal_move?(location)
-		( location[:y] == self.y + 1 ) &&
+		( location[:y].in?([ self.y + 1, self.y - 1]) ) &&
 		( location[:x].in?([ self.x + 1, self.x - 1]) )
 	end
 
+  def horizontal_move?(location)
+    ( location[:y] == self.y ) &&
+    ( location[:x].in?([ self.x + 1, self.x - 1]) )
+  end
+
 end
+
