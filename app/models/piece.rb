@@ -5,9 +5,7 @@ class Piece < ApplicationRecord
   alias_attribute :y, :y_location
 
   def valid_move?(x:, y:)
-    if obstructed?(self.x, self.y, x, y)
-      return false
-    end
+    return false if obstructed?(self.x, self.y, x, y)
   end
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
