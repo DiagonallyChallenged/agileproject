@@ -1,10 +1,10 @@
 class King < Piece
-  def valid_move?(x:, y:)
-    return false if obstructed?(self.x, self.y, x, y)
+  def valid_move?(x_des:, y_des:)
+    return false if obstructed?(x, y, x_des, y_des)
 
     location = {
-      x: x,
-      y: y
+      x: x_des,
+      y: y_des
     }
 
     (one_square_forward_or_backwards?(location) && empty_square?(location)) || \
