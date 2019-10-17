@@ -11,6 +11,36 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(true)
     end
 
+    it 'shoud not be able to move two squares vertically' do
+      game = Game.create
+      piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 2
+      }
+      expect(piece.valid_move?(new_location)).to eq(false)
+    end
+
+    it 'shoud not be able to move two squares diagonally' do
+      game = Game.create
+      piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
+      new_location = {
+        x_des: piece.x + 2,
+        y_des: piece.y + 2
+      }
+      expect(piece.valid_move?(new_location)).to eq(false)
+    end
+
+    it 'shoud not be able to move two squares horizonally' do
+      game = Game.create
+      piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
+      new_location = {
+        x_des: piece.x + 2,
+        y_des: piece.y
+      }
+      expect(piece.valid_move?(new_location)).to eq(false)
+    end
+
     it 'should be able to move backwards' do
       piece = Piece.create(x: 5, y: 1, type: 'King')
       new_location = {
