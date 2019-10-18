@@ -91,14 +91,5 @@ RSpec.describe 'movement logic' do
 
       expect(piece.valid_move?(new_location)).to be false
     end
-
-    it 'should return false if spot is off the board' do
-      piece = Piece.create(x: 1, y: 1, type: 'Knight')
-      new_location = {
-        x_des: piece.x - 1,
-        y_des: piece.y - 2
-      }
-      expect(piece.valid_move?(new_location)).to be false
-    end
   end
 end
