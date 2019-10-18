@@ -69,4 +69,36 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(true)
     end
   end
+
+  describe 'knight' do
+    it 'should NOT check for obstructions and return true for valid move' do
+      piece = Piece.create(x: 1, y: 1, type: 'Knight')
+      new_location = {
+        x_des: piece.x + 2,
+        y_des: piece.y + 1
+      }
+
+      Piece.create(x: 2, y: 1, type: 'Knight')
+      expect(piece.valid_move?(new_location)).to be true
+    end
+
+    it 'should return true if move is not valid for knight' do
+      piece = Piece.create(x: 1, y: 1, type: 'Knight')
+      new_location = {
+        x_des: piece.x + 1,
+        y_des: piece.y
+      }
+
+      expect(piece.valid_move?(new_location)).to be false
+    end
+
+    it 'should return false if spot is off the board' do
+      piece = Piece.create(x: 1, y: 1, type: 'Knight')
+      new_location = {
+        x_des: piece.x - 1,
+        y_des: piece.y - 2
+      }
+      expect(piece.valid_move?(new_location)).to be false
+    end
+  end
 end
