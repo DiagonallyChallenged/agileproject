@@ -133,4 +133,28 @@ RSpec.describe Piece, type: :model do
       expect(piece1.obstructed?(2, 4, 5, 1)).to be true
     end
   end
+
+  describe '.piece_color' do
+    it 'should return white if the piece is owned by the white player' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      game.join_game(user, 'white')
+      game.save
+
+      piece = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: user)
+
+      expect(piece.piece_color).to eq('white')
+    end
+
+    it 'should return black if the piece is owned by the black player' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      game.join_game(user, 'black')
+      game.save
+
+      piece = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: user)
+
+      expect(piece.piece_color).to eq('black')
+    end
+  end
 end

@@ -124,7 +124,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to be true
     end
 
-    it 'should be able to move one down, if white pawn' do
+    it 'should not be able to move one down, if white pawn' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.white_player)
       new_location = {
@@ -134,7 +134,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to be false
     end
 
-    it 'should be able to move one down, up black pawn' do
+    it 'should not be able to move one down, up black pawn' do
       user = FactoryBot.create(:user)
       game = FactoryBot.create(:game)
       game.join_game(user, 'black')
@@ -148,7 +148,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to be false
     end
 
-    it 'should only be able to move twice in its starting postion' do
+    it 'should only be able to move twice from its starting postion' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
       new_location = {
@@ -157,14 +157,24 @@ RSpec.describe 'movement logic' do
       }
 
       piece2 = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: game.white_player)
-      new_location = {
+      new_location2 = {
         x_des: piece2.x,
         y_des: piece2.y + 2
       }
 
       expect(piece.valid_move?(new_location)).to be true
-      expect(piece2.valid_move?(new_location)).to be false
+      expect(piece2.valid_move?(new_location2)).to be false
     end
 
+    it 'should not allow horizontal movement' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x - 1,
+        y_des: piece.y
+      }
+      expect(piece.valid_move?(new_location)).to be false
+
+    end
   end
 end
