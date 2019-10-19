@@ -98,5 +98,73 @@ RSpec.describe 'movement logic' do
         expect(piece.valid_move?(new_location)).to be false
       end
     end
+
+  describe 'Pawn' do
+    it 'should be able to move one up, if white pawn' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 1
+      }
+      expect(piece.valid_move?(new_location)).to be true
+    end
+
+    it 'should be able to move one down, if black pawn' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      game.join_game(user, 'black')
+      game.save
+
+      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.black_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y - 1
+      }
+      expect(piece.valid_move?(new_location)).to be true
+    end
+
+    it 'should be able to move one down, if white pawn' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y - 1
+      }
+      expect(piece.valid_move?(new_location)).to be false
+    end
+
+    it 'should be able to move one down, up black pawn' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      game.join_game(user, 'black')
+      game.save
+
+      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.black_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 1
+      }
+      expect(piece.valid_move?(new_location)).to be false
+    end
+
+    it 'should only be able to move twice in its starting postion' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 2
+      }
+
+      piece2 = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece2.x,
+        y_des: piece2.y + 2
+      }
+
+      expect(piece.valid_move?(new_location)).to be true
+      expect(piece2.valid_move?(new_location)).to be false
+    end
+
   end
 end
