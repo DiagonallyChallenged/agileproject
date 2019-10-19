@@ -1,8 +1,10 @@
 class Knight < Piece
 
   def valid_move?(x_des:, y_des:)
-    valid_moves = [[(x_des + 2), (y_des + 1)], [(x_des + 2), (y_des - 1)], [(x_des + 2), (y_des + 1)]]
-    move_to = [x_des, y_des]
-    valid_moves.include?(move_to) ? true : false
+    x_distance = (self.x_location - x_des).abs
+    y_distance = (self.y_location - y_des).abs
+
+    return true if x_distance == 2 && y_distance == 1 || x_distance == 1 && y_distance == 2 
+    false
   end
 end

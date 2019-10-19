@@ -71,8 +71,8 @@ RSpec.describe 'movement logic' do
   end
 
   describe 'knight' do
-    it 'should NOT check for obstructions and return true for valid move' do
-      piece = Piece.create(x: 1, y: 1, type: 'Knight')
+    it 'it should ignore obstructions for valid moves' do
+      piece = Piece.create(x: 4, y: 4, type: 'Knight')
       new_location = {
         x_des: piece.x + 2,
         y_des: piece.y + 1
@@ -80,6 +80,20 @@ RSpec.describe 'movement logic' do
 
       Piece.create(x: 2, y: 1, type: 'Knight')
       expect(piece.valid_move?(new_location)).to be true
+    end
+
+    it 'it should return true for all eight valid moves' do
+      piece = Piece.create(x: 4, y: 4, type: 'Knight')
+      valid_moves = [[6, 5], [6, 3], [2, 5], [2, 3], [5, 6], [3, 6], [5, 2], [3, 2]]
+
+      valid_moves.each do |valid_move|
+        new_location = {
+          x_des: valid_move[0],
+          y_des: valid_move[1]
+        }
+        
+        expect(piece.valid_move?(new_location)).to be true
+      end
     end
 
     it 'should return true if move is not valid for knight' do
