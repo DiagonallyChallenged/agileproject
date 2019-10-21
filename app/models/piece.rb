@@ -85,4 +85,11 @@ class Piece < ApplicationRecord
     end
     false
   end
+
+  # rubocop:disable Naming/UncommunicativeMethodParamName
+
+  def piece_on_board(x, y)
+    x >= 1 && x <= 8 && y >= 1 && y <= 8
+  end
 end
+# rubocop:enable Naming/UncommunicativeMethodParamName

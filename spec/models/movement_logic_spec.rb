@@ -11,7 +11,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(true)
     end
 
-    it 'shoud not be able to move two squares vertically' do
+    it 'should not be able to move two squares vertically' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -21,7 +21,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(false)
     end
 
-    it 'shoud not be able to move two squares diagonally' do
+    it 'should not be able to move two squares diagonally' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -31,7 +31,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(false)
     end
 
-    it 'shoud not be able to move two squares horizonally' do
+    it 'should not be able to move two squares horizonally' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -96,6 +96,28 @@ RSpec.describe 'movement logic' do
         }
 
         expect(piece.valid_move?(new_location)).to be false
+      end
+    end
+  end
+
+  describe 'queen' do
+    it 'it should return true for valid moves' do
+      game = Game.create
+      piece = Piece.create(x: 4, y: 4, type: 'Queen', game: game)
+      valid_moves = [[5, 4], [3, 4], [4, 5], [4, 3], [3, 3]]
+
+      valid_moves.each do |(x, y)|
+        expect(piece.valid_move?(x, y)).to be true
+      end
+    end
+
+    it 'it should return false for invalid moves' do
+      game = Game.create
+      piece = Piece.create(x: 4, y: 4, type: 'Queen', game: game)
+      invalid_moves = [[5, 1]]
+
+      invalid_moves.each do |(x, y)|
+        expect { piece.valid_move?(x, y) }.to raise_error('Invalid Move')
       end
     end
   end
