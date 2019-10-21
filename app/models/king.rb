@@ -16,10 +16,6 @@ class King < Piece
       (location[:x] == x)
   end
 
-  def empty_square?(location)
-    Piece.find_by(location).nil?
-  end
-
   def diagonal_move?(location)
     location[:y].in?([y + 1, y - 1]) &&
       location[:x].in?([x + 1, x - 1])
