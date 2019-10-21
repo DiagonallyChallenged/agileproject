@@ -5,7 +5,7 @@ class Pawn < Piece
     color = piece_color
 
     if x_distance.zero?
-      return true if valid_vertical_move?(x_des, y_distance, color)
+      return true if valid_vertical_move?(x_des, y_distance, color) && pawn_correct_direction?(y_distance, color)
     elsif x_distance == 1
       return true if valid_diag_move?(x_des, y_des, x_distance, y_distance, color)
     end
@@ -40,13 +40,11 @@ class Pawn < Piece
   end
 
   def valid_vertical_move?(x_des, y_distance, color)
-    if pawn_correct_direction?(y_distance, color)
-      if y_distance.abs == 2 && valid_double_move?(x_des, color)
-        return true if game.space_occupied?(x_des, y_location)
-      elsif y_distance.abs == 1
-        return true if game.space_occupied?(x_des, y_location)
-      end
-      false
+    if y_distance.abs == 2 && valid_double_move?(x_des, color)
+      return true if game.space_occupied?(x_des, y_location)
+    elsif y_distance.abs == 1
+      return true if game.space_occupied?(x_des, y_location)
     end
+    false
   end
 end
