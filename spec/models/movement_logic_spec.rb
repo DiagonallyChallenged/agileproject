@@ -98,6 +98,7 @@ RSpec.describe 'movement logic' do
         expect(piece.valid_move?(new_location)).to be false
       end
     end
+  end
 
   describe 'Pawn' do
     it 'white pawns should be able to move up but not down' do
