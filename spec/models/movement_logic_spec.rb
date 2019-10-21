@@ -162,7 +162,6 @@ RSpec.describe 'movement logic' do
         y_des: piece.y
       }
       expect(piece.valid_move?(new_location)).to be false
-
     end
 
     it 'should only allow diagonal movement if capturing' do

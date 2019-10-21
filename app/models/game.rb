@@ -59,6 +59,6 @@ class Game < ApplicationRecord
   end
 
   def get_piece_at_location(x_location, y_location)
-    return pieces.where(x_location: x_location, y_location: y_location, active: true).first
+    pieces.where(x_location: x_location, y_location: y_location, active: true).first
   end
 end
