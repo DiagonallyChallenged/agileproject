@@ -40,11 +40,8 @@ class Pawn < Piece
   end
 
   def valid_vertical_move?(x_des, y_distance, color)
-    if y_distance.abs == 2 && valid_double_move?(x_des, color)
-      return true if game.space_occupied?(x_des, y_location)
-    elsif y_distance.abs == 1
-      return true if game.space_occupied?(x_des, y_location)
-    end
+    return true if (y_distance.abs == 2 && valid_double_move?(x_des, color)) || y_distance.abs == 1
+
     false
   end
 end
