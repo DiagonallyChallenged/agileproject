@@ -103,7 +103,7 @@ RSpec.describe 'movement logic' do
   describe 'Pawn' do
     it 'white pawns should be able to move up but not down' do
       game = FactoryBot.create(:game)
-      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.white_player)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
       new_location = {
         x_des: piece.x,
         y_des: piece.y + 1
@@ -123,7 +123,7 @@ RSpec.describe 'movement logic' do
       game.join_game(user, 'black')
       game.save
 
-      piece = Piece.create(x: 5, y: 1, type: 'Pawn', game: game, user: game.black_player)
+      piece = Piece.create(x: 5, y: 7, type: 'Pawn', game: game, user: game.black_player)
       new_location = {
         x_des: piece.x,
         y_des: piece.y - 1
