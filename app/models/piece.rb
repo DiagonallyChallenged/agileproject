@@ -85,4 +85,12 @@ class Piece < ApplicationRecord
     end
     false
   end
+
+  def piece_color
+    if user == game.white_player
+      'white'
+    elsif user == game.black_player
+      'black'
+    end
+  end
 end

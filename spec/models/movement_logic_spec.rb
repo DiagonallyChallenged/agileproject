@@ -99,4 +99,93 @@ RSpec.describe 'movement logic' do
       end
     end
   end
+
+  describe 'Pawn' do
+    it 'white pawns should be able to move up but not down' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 1
+      }
+
+      new_location2 = {
+        x_des: piece.x,
+        y_des: piece.y - 1
+      }
+      expect(piece.valid_move?(new_location)).to be true
+      expect(piece.valid_move?(new_location2)).to be false
+    end
+
+    it 'black pawns should be able to move down but not up' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      game.join_game(user, 'black')
+      game.save
+
+      piece = Piece.create(x: 5, y: 7, type: 'Pawn', game: game, user: game.black_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y - 1
+      }
+
+      new_location2 = {
+        x_des: piece.x,
+        y_des: piece.y + 1
+      }
+      expect(piece.valid_move?(new_location)).to be true
+      expect(piece.valid_move?(new_location2)).to be false
+    end
+
+    it 'should only be able to move twice from its starting postion' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x,
+        y_des: piece.y + 2
+      }
+
+      piece2 = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: game.white_player)
+      new_location2 = {
+        x_des: piece2.x,
+        y_des: piece2.y + 2
+      }
+
+      expect(piece.valid_move?(new_location)).to be true
+      expect(piece2.valid_move?(new_location2)).to be false
+    end
+
+    it 'should not allow horizontal movement' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      new_location = {
+        x_des: piece.x - 1,
+        y_des: piece.y
+      }
+      expect(piece.valid_move?(new_location)).to be false
+    end
+
+    it 'should only allow diagonal movement if capturing' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+      game.save
+
+      Piece.create(x: 6, y: 3, type: 'Pawn', game: game, user: game.black_player)
+
+      new_location = {
+        x_des: piece.x + 1,
+        y_des: piece.y + 1
+      }
+
+      new_location2 = {
+        x_des: piece.x - 1,
+        y_des: piece.y + 1
+      }
+
+      expect(piece.valid_move?(new_location)).to be true
+      expect(piece.valid_move?(new_location2)).to be false
+    end
+  end
 end
