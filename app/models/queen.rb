@@ -81,3 +81,5 @@ class Queen < Piece
   end
 end
 # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
+
+# Trying to fix any merge problems with valid-queen-move
