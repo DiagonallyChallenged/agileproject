@@ -11,7 +11,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(true)
     end
 
-    it 'shoud not be able to move two squares vertically' do
+    it 'should not be able to move two squares vertically' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -21,7 +21,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(false)
     end
 
-    it 'shoud not be able to move two squares diagonally' do
+    it 'should not be able to move two squares diagonally' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -31,7 +31,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(false)
     end
 
-    it 'shoud not be able to move two squares horizonally' do
+    it 'should not be able to move two squares horizonally' do
       game = Game.create
       piece = Piece.create(x: 5, y: 1, type: 'King', game: game)
       new_location = {
@@ -60,7 +60,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location)).to eq(true)
     end
 
-    it 'should be able to move horizonally' do
+    it 'should be able to move horizontally' do
       piece = Piece.create(x: 5, y: 1, type: 'King')
       new_location = {
         x_des: piece.x + 1,
@@ -137,7 +137,7 @@ RSpec.describe 'movement logic' do
       expect(piece.valid_move?(new_location2)).to be false
     end
 
-    it 'should only be able to move twice from its starting postion' do
+    it 'should only be able to move twice from its starting position' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 5, y: 2, type: 'Pawn', game: game, user: game.white_player)
       new_location = {
@@ -189,35 +189,57 @@ RSpec.describe 'movement logic' do
     end
   end
 
-  describe 'bishop' do
-    it 'should return true if all moves are valid moves' do
+  describe 'Queen' do
+    it 'should return true for valid moves' do
       game = Game.create
-      piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
-      valid_moves = [[1, 3], [2, 2], [4, 2], [5, 3], [6, 4], [7, 5], [8, 6]]
+      piece = Piece.create(x: 4, y: 4, type: 'Queen', game: game)
+      valid_moves = [[5, 4], [3, 4], [4, 5], [4, 3], [3, 3]]
 
-      expect(valid_moves).to all(satisfy('be a valid move') do |valid_move|
-        new_location = {
-          x_des: valid_move[0],
-          y_des: valid_move[1]
-        }
-
-        piece.valid_move?(new_location)
-      end)
+      valid_moves.each do |(x, y)|
+        expect(piece.valid_move?(x, y)).to be true
+      end
     end
 
-    it 'should return false if move is not valid for bishop' do
+    it 'it should return false for invalid moves' do
       game = Game.create
-      piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
-      invalid_moves = [[4, 1], [2, 1], [3, 2]]
+      piece = Piece.create(x: 4, y: 4, type: 'Queen', game: game)
+      invalid_moves = [[5, 1]]
 
-      expect(invalid_moves).to all(satisfy('be a invalid move') do |invalid_move|
-        new_location = {
-          x_des: invalid_move[0],
-          y_des: invalid_move[1]
-        }
-
-        piece.valid_move?(new_location) == false
-      end)
+      invalid_moves.each do |(x, y)|
+        expect { piece.valid_move?(x, y) }.to raise_error('Invalid Move')
+      end
     end
+  end
+end
+
+describe 'Bishop' do
+  it 'should return true if all moves are valid moves' do
+    game = Game.create
+    piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
+    valid_moves = [[1, 3], [2, 2], [4, 2], [5, 3], [6, 4], [7, 5], [8, 6]]
+
+    expect(valid_moves).to all(satisfy('be a valid move') do |valid_move|
+      new_location = {
+        x_des: valid_move[0],
+        y_des: valid_move[1]
+      }
+
+      piece.valid_move?(new_location) == true
+    end)
+  end
+
+  it 'should return false if move is not valid for bishop' do
+    game = Game.create
+    piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
+    invalid_moves = [[4, 1], [2, 1], [3, 2]]
+
+    expect(invalid_moves).to all(satisfy('be a invalid move') do |invalid_move|
+      new_location = {
+        x_des: invalid_move[0],
+        y_des: invalid_move[1]
+      }
+
+      piece.valid_move?(new_location) == false
+    end)
   end
 end
