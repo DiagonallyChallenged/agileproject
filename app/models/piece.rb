@@ -86,16 +86,11 @@ class Piece < ApplicationRecord
     false
   end
 
-<<<<<<< HEAD
   def piece_color
     if user == game.white_player
       'white'
     elsif user == game.black_player
       'black'
     end
-=======
-  def empty_square?(location)
-    Piece.find_by(location).nil?
->>>>>>> bishop movement
   end
 end

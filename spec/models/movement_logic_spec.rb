@@ -186,6 +186,7 @@ RSpec.describe 'movement logic' do
 
       expect(piece.valid_move?(new_location)).to be true
       expect(piece.valid_move?(new_location2)).to be false
+    end
 
   describe 'bishop' do
     it 'should return true if all moves are valid moves' do
