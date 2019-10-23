@@ -7,7 +7,7 @@ class King < Piece
       y: y_des
     }
 
-    (one_square_forward_or_backwards?(location) && empty_square?(location)) || \
+    one_square_forward_or_backwards?(location) || \
       (diagonal_move?(location) || horizontal_move?(location))
   end
 

@@ -7,7 +7,7 @@ class Bishop < Piece
       y: y_des
     }
 
-    diagonal_move?(location) && empty_square?(location)
+    diagonal_move?(location)
   end
 
   def diagonal_move?(location)
