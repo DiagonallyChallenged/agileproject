@@ -7,17 +7,13 @@ class King < Piece
       y: y_des
     }
 
-    (one_square_forward_or_backwards?(location) && empty_square?(location)) || \
+    one_square_forward_or_backwards?(location) || \
       (diagonal_move?(location) || horizontal_move?(location))
   end
 
   def one_square_forward_or_backwards?(location)
     location[:y].in?([y + 1, y - 1]) &&
       (location[:x] == x)
-  end
-
-  def empty_square?(location)
-    Piece.find_by(location).nil?
   end
 
   def diagonal_move?(location)
