@@ -15,15 +15,11 @@ class Piece < ApplicationRecord
   def move_to!(new_x, new_y)
     if game.space_occupied?(new_x, new_y)
       piece_at_destination = game.pieces.find_by(x_location: new_x, y_location: new_y)
-      if piece_at_destination.user != user
-        piece_at_destination.capture_piece!
-        update_piece_location!(new_x, new_y)
-        return unless
-          raise 'Invalid Move'
-      end
-    else
-      update_piece_location!(new_x, new_y)
+      raise 'Invalid Move' unless piece_at_destination.user != user
+
+      piece_at_destination.capture_piece!
     end
+    update_piece_location!(new_x, new_y)
   end
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
