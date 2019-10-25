@@ -89,4 +89,30 @@ RSpec.describe Game, type: :model do
       expect(game.pieces.count).to eq(32)
     end
   end
+
+  describe 'check?' do
+    it 'should return true if oppenents king is in threat of capture' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+
+      queen = FactoryBot.create(:piece, id: 1, x_location: 6, y_location: 6, type: 'Queen', game_id: game.id, user_id: game.white_player.id)
+      FactoryBot.create(:piece, id: 2, x_location: 4, y_location: 8, type: 'King', game_id: game.id, user_id: user.id)
+
+      check_status = game.check?(queen.user)
+      expect(check_status).to be true
+    end
+
+    it 'should return false if oppenents king is not in threat' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+
+      queen = FactoryBot.create(:piece, id: 1, x_location: 5, y_location: 6, type: 'Queen', game_id: game.id, user_id: game.white_player.id)
+      FactoryBot.create(:piece, id: 2, x_location: 4, y_location: 8, type: 'King', game_id: game.id, user_id: user.id)
+
+      check_status = game.check?(queen.user)
+      expect(check_status).to be false
+    end
+  end
 end
