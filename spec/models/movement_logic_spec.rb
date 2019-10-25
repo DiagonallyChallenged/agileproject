@@ -241,7 +241,7 @@ RSpec.describe 'movement logic' do
         piece.valid_move?(new_location) == false
       end)
     end
-  end 
+  end
 
   describe 'rook' do
     it 'it should return true for all horizontal moves' do
@@ -259,7 +259,7 @@ RSpec.describe 'movement logic' do
       end
     end
 
-      it 'it should return true for all vertical moves' do
+    it 'it should return true for all vertical moves' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
       valid_moves = [[4, 3], [4, 2], [4, 1], [4, 5], [4, 6], [4, 7], [4, 8]]
@@ -278,7 +278,7 @@ RSpec.describe 'movement logic' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
       invalid_moves = [[1, 1], [5, 5], [3, 5], [5, 3]]
-      puts game.pieces.count 
+      puts game.pieces.count
       invalid_moves.each do |invalid_move|
         new_location = {
           x_des: invalid_move[0],
