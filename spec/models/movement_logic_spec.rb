@@ -210,36 +210,83 @@ RSpec.describe 'movement logic' do
       end
     end
   end
-end
 
-describe 'Bishop' do
-  it 'should return true if all moves are valid moves' do
-    game = Game.create
-    piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
-    valid_moves = [[1, 3], [2, 2], [4, 2], [5, 3], [6, 4], [7, 5], [8, 6]]
+  describe 'Bishop' do
+    it 'should return true if all moves are valid moves' do
+      game = Game.create
+      piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
+      valid_moves = [[1, 3], [2, 2], [4, 2], [5, 3], [6, 4], [7, 5], [8, 6]]
 
-    expect(valid_moves).to all(satisfy('be a valid move') do |valid_move|
-      new_location = {
-        x_des: valid_move[0],
-        y_des: valid_move[1]
-      }
+      expect(valid_moves).to all(satisfy('be a valid move') do |valid_move|
+        new_location = {
+          x_des: valid_move[0],
+          y_des: valid_move[1]
+        }
 
-      piece.valid_move?(new_location) == true
-    end)
+        piece.valid_move?(new_location) == true
+      end)
+    end
+
+    it 'should return false if move is not valid for bishop' do
+      game = Game.create
+      piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
+      invalid_moves = [[4, 1], [2, 1], [3, 2]]
+
+      expect(invalid_moves).to all(satisfy('be a invalid move') do |invalid_move|
+        new_location = {
+          x_des: invalid_move[0],
+          y_des: invalid_move[1]
+        }
+
+        piece.valid_move?(new_location) == false
+      end)
+    end
   end
 
-  it 'should return false if move is not valid for bishop' do
-    game = Game.create
-    piece = Piece.create(x: 3, y: 1, type: 'Bishop', game: game)
-    invalid_moves = [[4, 1], [2, 1], [3, 2]]
+  describe 'rook' do
+    it 'it should return true for all horizontal moves' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
+      valid_moves = [[3, 4], [2, 4], [1, 4], [5, 4], [6, 4], [7, 4], [8, 4]]
 
-    expect(invalid_moves).to all(satisfy('be a invalid move') do |invalid_move|
-      new_location = {
-        x_des: invalid_move[0],
-        y_des: invalid_move[1]
-      }
+      valid_moves.each do |valid_move|
+        new_location = {
+          x_des: valid_move[0],
+          y_des: valid_move[1]
+        }
 
-      piece.valid_move?(new_location) == false
-    end)
+        expect(piece.valid_move?(new_location)).to be true
+      end
+    end
+
+    it 'it should return true for all vertical moves' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
+      valid_moves = [[4, 3], [4, 2], [4, 1], [4, 5], [4, 6], [4, 7], [4, 8]]
+
+      valid_moves.each do |valid_move|
+        new_location = {
+          x_des: valid_move[0],
+          y_des: valid_move[1]
+        }
+
+        expect(piece.valid_move?(new_location)).to be true
+      end
+    end
+
+    it 'should return false if move is not valid for Rook' do
+      game = FactoryBot.create(:game)
+      piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
+      invalid_moves = [[1, 1], [5, 5], [3, 5], [5, 3]]
+      puts game.pieces.count
+      invalid_moves.each do |invalid_move|
+        new_location = {
+          x_des: invalid_move[0],
+          y_des: invalid_move[1]
+        }
+
+        expect(piece.valid_move?(new_location)).to be false
+      end
+    end
   end
 end
