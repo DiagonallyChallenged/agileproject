@@ -1,3 +1,11 @@
+<!--<script>-->
+<!--  $(function () {-->
+<!--    $('ul.pieces').hide('slow');-->
+
+<!--  });-->
+<!--</script>-->
+
+
 
 <h1><%= @game.name %></h1>
 
@@ -8,11 +16,13 @@
       <div class="board-row board-row-<%= y %>">
         <% (1..8).each do |x| %>
           <div class="square square-<%= black_or_white(x, y) %>">
+            <ul class="pieces">
             <% @pieces.each do |piece| %>
               <% if piece.x_location == x && piece.y_location == y && piece.active %>
                 <%= link_to piece.type, piece_path(piece) %>
               <% end %>
             <% end %>
+            </ul>
           </div>
         <% end %>
       </div>
