@@ -33,3 +33,62 @@ $boardHeight: 600px;
 .square-highlight {
   background-color: #33FF39
 }
+
+.piece {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  font-size: 35px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.piece[data-color="white"][data-type="Pawn"]:after {
+  content: '\2659'
+}
+
+.piece[data-color="white"][data-type="King"]:after {
+  content: '\2654'
+}
+
+.piece[data-color="white"][data-type="Queen"]:after {
+  content: '\2655'
+}
+
+.piece[data-color="white"][data-type="Rook"]:after {
+  content: '\2656'
+}
+
+.piece[data-color="white"][data-type="Bishop"]:after {
+  content: '\2657'
+}
+
+.piece[data-color="white"][data-type="Knight"]:after {
+  content: '\2658'
+}
+
+.piece[data-color="black"][data-type="Pawn"]:after {
+  content: '\265F'
+}
+
+.piece[data-color="black"][data-type="King"]:after {
+  content: '\265A'
+}
+
+.piece[data-color="black"][data-type="Queen"]:after {
+  content: '\265B'
+}
+
+.piece[data-color="black"][data-type="Rook"]:after {
+  content: '\265C'
+}
+
+.piece[data-color="black"][data-type="Bishop"]:after {
+  content: '\265D'
+}
+
+.piece[data-color="black"][data-type="Knight"]:after {
+  content: '\265E'
+}
