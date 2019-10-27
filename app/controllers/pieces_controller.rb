@@ -10,10 +10,20 @@ class PiecesController < ApplicationController
 
     @piece.move_to!(params[:x_location], params[:y_location])
 
+    return render_not_found if @piece.blank?
+    
+    x_des = params[:x_location]
+    y_des = params[:y_location]
+
+    if @piece.valid_move?(x_des: x_des, y_des: y_des )
+      @piece.move_to!(x_des, y_des)
+    end
+  
     respond_to do |format|
       format.html
       format.json
     end
+    redirect_to game_path(@piece.game)
   end
 
   private
