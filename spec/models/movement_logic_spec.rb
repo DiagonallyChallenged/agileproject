@@ -288,7 +288,7 @@ RSpec.describe 'movement logic' do
       game = FactoryBot.create(:game)
       piece = Piece.create(x: 4, y: 4, type: 'Rook', game: game)
       invalid_moves = [[1, 1], [5, 5], [3, 5], [5, 3]]
-      puts game.pieces.count
+
       invalid_moves.each do |invalid_move|
         new_location = {
           x_des: invalid_move[0],
