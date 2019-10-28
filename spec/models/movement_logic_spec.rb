@@ -196,7 +196,12 @@ RSpec.describe 'movement logic' do
       valid_moves = [[5, 4], [3, 4], [4, 5], [4, 3], [3, 3]]
 
       valid_moves.each do |(x, y)|
-        expect(piece.valid_move?(x, y)).to be true
+        new_location = {
+          x_des: x,
+          y_des: y
+        }
+
+        expect(piece.valid_move?(new_location)).to be true
       end
     end
 
@@ -206,7 +211,12 @@ RSpec.describe 'movement logic' do
       invalid_moves = [[5, 1]]
 
       invalid_moves.each do |(x, y)|
-        expect { piece.valid_move?(x, y) }.to raise_error('Invalid Move')
+        new_location = {
+          x_des: x,
+          y_des: y
+        }
+
+        expect { piece.valid_move?(new_location) }.to raise_error('Invalid Move')
       end
     end
   end
