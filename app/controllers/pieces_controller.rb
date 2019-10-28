@@ -11,7 +11,12 @@ class PiecesController < ApplicationController
     @piece.move_to!(params[:x_location], params[:y_location])
 
     # @piece.update_attributes(pieces_params)
-    redirect_to game_path(@piece.game)
+    # redirect_to game_path(@piece.game)
+    #
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
 
   private

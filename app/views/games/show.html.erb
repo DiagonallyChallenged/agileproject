@@ -1,4 +1,3 @@
-
 <h1><%= @game.name %></h1>
 
 
@@ -7,10 +6,15 @@
     <% (1..8).each do |y| %>
       <div class="board-row board-row-<%= y %>">
         <% (1..8).each do |x| %>
-          <div class="square square-<%= black_or_white(x, y) %>">
+          <div class="square square-<%= black_or_white(x, y) %>" data-x="<%= x %>" data-y="<%= y %>">
             <% @pieces.each do |piece| %>
               <% if piece.x_location == x && piece.y_location == y && piece.active %>
-                <%= link_to piece.type, piece_path(piece) %>
+                <div class="piece"
+                     data-piece-id="<%= piece.id %>"
+                     data-type="<%= piece.type %>"
+                     data-color="<%= piece.piece_color %>">
+                  <%#= piece.type %>
+                </div>
               <% end %>
             <% end %>
           </div>
