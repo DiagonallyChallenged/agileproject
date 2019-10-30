@@ -109,6 +109,7 @@ RSpec.describe Game, type: :model do
       game.join_game(user, 'black')
 
       queen = FactoryBot.create(:piece, id: 1, x_location: 5, y_location: 6, type: 'Queen', game_id: game.id, user_id: game.white_player.id)
+      FactoryBot.create(:piece, id: 3, x_location: 1, y_location: 3, type: 'Pawn', game_id: game.id, user_id: game.white_player.id)
       FactoryBot.create(:piece, id: 2, x_location: 4, y_location: 8, type: 'King', game_id: game.id, user_id: user.id)
 
       check_status = game.in_check?(queen.user)

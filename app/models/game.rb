@@ -64,11 +64,9 @@ class Game < ApplicationRecord
 
   def location_check?(previous_move_player, location)
     previous_move_player.pieces.each do |piece|
-      begin
-        return true if piece.valid_move?(location)
-      rescue RuntimeError
-        return false
-      end
+      return true if piece.valid_move?(location)
+    rescue RuntimeError
+      return false
     end
 
     false
