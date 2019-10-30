@@ -62,16 +62,25 @@ class Game < ApplicationRecord
     pieces.where(x_location: x_location, y_location: y_location, active: true).first
   end
 
-  def check?(previous_move_player)
+  def location_check?(previous_move_player, location)
+    previous_move_player.pieces.each do |piece|
+      begin
+        return true if piece.valid_move?(location)
+      rescue RuntimeError
+        return false
+      end
+    end
+
+    false
+  end
+
+  def in_check?(previous_move_player)
     opposing_king = pieces.where(type: 'King').where.not(user: previous_move_player).first
     kings_location = {
       x_des: opposing_king.x_location,
       y_des: opposing_king.y_location
     }
-
-    previous_move_player.pieces.each do |piece|
-      return true if piece.valid_move?(kings_location)
-    end
+    return true if location_check?(previous_move_player, kings_location)
 
     false
   end
