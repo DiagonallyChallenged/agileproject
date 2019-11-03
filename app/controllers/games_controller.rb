@@ -21,7 +21,7 @@ class GamesController < ApplicationController
     @game.join_game(current_user, 'white')
     if @game.valid?
       @game.save
-      redirect_to root_path
+      redirect_to game_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -33,6 +33,13 @@ class GamesController < ApplicationController
     game.save
     game.populate_game
     redirect_to game_path game
+  end
+
+  def destroy
+    @game = Game.find(params[:id])
+    return render_not_found if @game.blank?
+    @game.destroy
+      redirect_to root_path
   end
 
   private
