@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-describe "games#destroy" do
-  it "should allow a user forfeit a game" do
-     user = FactoryBot.create(:user)
-     game = FactoryBot.create(:game)
-     sign_in user
-     delete :destroy, params: { id: game.id }
-     game = Game.find_by_id(game.id)
-     expect(game).to eq nil
-     expect(response).to redirect_to root_path
-   end
- end
-
   describe '.create_pawns' do
     it 'should only create 16 pawns' do
       game = FactoryBot.create(:game)

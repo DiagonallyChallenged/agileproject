@@ -38,8 +38,9 @@ class GamesController < ApplicationController
   def destroy
     @game = Game.find(params[:id])
     return render_not_found if @game.blank?
+
     @game.destroy
-      redirect_to root_path
+    redirect_to root_path
   end
 
   private
