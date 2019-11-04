@@ -95,4 +95,16 @@ RSpec.describe GamesController, type: :controller do
       expect(game.pieces.count).to eq(32)
     end
   end
+
+  describe 'games#destroy' do
+    it 'should allow a user forfeit a game' do
+      user = FactoryBot.create(:user)
+      game = FactoryBot.create(:game)
+      sign_in user
+      delete :destroy, params: { id: game.id }
+      game = Game.find_by_id(game.id)
+      expect(game).to eq nil
+      expect(response).to redirect_to root_path
+    end
+  end
 end
