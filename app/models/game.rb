@@ -82,4 +82,9 @@ class Game < ApplicationRecord
 
     false
   end
+
+  def change_turn!
+    turn == 'white' ? color = 'black' : color = 'white'
+    update_attributes(turn: color)
+  end
 end

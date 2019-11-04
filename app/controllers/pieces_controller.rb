@@ -9,10 +9,8 @@ class PiecesController < ApplicationController
     return render_not_found if @piece.blank?
 
     @piece.move_to!(params[:x_location], params[:y_location])
+    game.change_turn!
 
-    # @piece.update_attributes(pieces_params)
-    # redirect_to game_path(@piece.game)
-    #
     respond_to do |format|
       format.html
       format.json
