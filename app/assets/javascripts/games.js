@@ -1,6 +1,7 @@
 $(function () {
   $('.piece').draggable({
     snap: '.square',
+    revert: 'invalid'
   });
 
   $('.square').droppable({
@@ -22,10 +23,17 @@ $(function () {
         data: newLocation,
         dataType: 'json',
       }).then(function() {
-        console.log('We did it!')
+        let currentTurn = $('.current-turn').text();
+        console.log(currentTurn);
+
+        if (currentTurn === 'White') {
+          $('.current-turn').text('Black');
+        } else {
+          $('.current-turn').text('White');
+        }
       }).catch(function() {
-        console.log('We didnt do it!')
-      })
+        console.log('Can this revert?')
+      });
 
     }
   });

@@ -7,9 +7,10 @@ class PiecesController < ApplicationController
   def update
     @piece = Piece.find_by_id(params[:id])
     return render_not_found if @piece.blank?
+    raise 'InvalidMove' unless @piece.correct_turn?
 
     @piece.move_to!(params[:x_location], params[:y_location])
-    game.change_turn!
+    @piece.game.change_turn!
 
     respond_to do |format|
       format.html

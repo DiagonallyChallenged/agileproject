@@ -95,5 +95,11 @@ class Piece < ApplicationRecord
   def piece_on_board(x, y)
     x >= 1 && x <= 8 && y >= 1 && y <= 8
   end
+  # rubocop:enable Naming/UncommunicativeMethodParamName
+
+  def correct_turn?
+    return true if piece_color == game.turn
+
+    false
+  end
 end
-# rubocop:enable Naming/UncommunicativeMethodParamName

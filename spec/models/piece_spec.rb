@@ -157,4 +157,23 @@ RSpec.describe Piece, type: :model do
       expect(piece.piece_color).to eq('black')
     end
   end
+
+  describe 'correct_turn?' do
+    it 'should return true if the piece is able to move next' do
+      game = FactoryBot.create(:game)
+
+      piece = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: game.white_player)
+
+      expect(piece.correct_turn?).to be true
+    end
+
+    it 'should return false if the piece is NOT able to move next' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+      piece = Piece.create(x: 5, y: 3, type: 'Pawn', game: game, user: user)
+
+      expect(piece.correct_turn?).to be false
+    end
+  end
 end
