@@ -82,4 +82,23 @@ class Game < ApplicationRecord
 
     false
   end
+
+  def get_opponent(player)
+    return player == white_player ? black_player : white_player
+  end
+
+  def stalemate?(player)
+    player_king = pieces.where(type: 'King', user: player).first
+    opponent = get_opponent(player)
+    player_king.kings_moves.each do |move|
+      new_location = {
+        x_des: player_king.x + move.first,
+        y_des: player_king.y + move.last
+      }
+
+      return true if location_check?(opponent, new_location)
+    end
+
+    false
+  end
 end

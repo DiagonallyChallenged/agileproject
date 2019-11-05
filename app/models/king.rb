@@ -1,4 +1,6 @@
 class King < Piece
+  attr_reader :kings_moves
+
   def valid_move?(x_des:, y_des:)
     return false if obstructed?(x, y, x_des, y_des)
 
@@ -24,5 +26,18 @@ class King < Piece
   def horizontal_move?(location)
     (location[:y] == y) &&
       location[:x].in?([x + 1, x - 1])
+  end
+
+  def kings_moves
+    [
+      [1, 0],
+      [-1, 0],
+      [0, 1],
+      [0, -1],
+      [1, 1],
+      [-1, -1],
+      [-1, 1],
+      [1, -1]
+    ]
   end
 end

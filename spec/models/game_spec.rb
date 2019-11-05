@@ -116,4 +116,29 @@ RSpec.describe Game, type: :model do
       expect(check_status).to be false
     end
   end
+
+  describe 'stalemate?' do
+    it 'should return true if game has no moves left' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+
+      FactoryBot.create(:piece, id: 1, x_location: 8, y_location: 8, type: 'King', game_id: game.id, user_id: game.black_player.id)
+      FactoryBot.create(:piece, id: 2, x_location: 6, y_location: 7, type: 'King', game_id: game.id, user_id: game.white_player.id)
+      FactoryBot.create(:piece, id: 3, x_location: 7, y_location: 6, type: 'Queen', game_id: game.id, user_id: game.white_player.id)
+
+
+      expect(game.stalemate?(game.black_player)).to be true
+    end
+
+    it 'should return false if there are moves left' do
+      game = FactoryBot.create(:game)
+      user = FactoryBot.create(:user)
+      game.join_game(user, 'black')
+      game.populate_game
+
+      expect(game.stalemate?(game.white_player)).to be false
+    end
+
+  end
 end
