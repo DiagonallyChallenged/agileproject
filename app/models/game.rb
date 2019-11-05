@@ -84,7 +84,7 @@ class Game < ApplicationRecord
   end
 
   def get_opponent(player)
-    return player == white_player ? black_player : white_player
+    player == white_player ? black_player : white_player
   end
 
   def stalemate?(player)

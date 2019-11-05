@@ -1,6 +1,4 @@
 class King < Piece
-  attr_reader :kings_moves
-
   def valid_move?(x_des:, y_des:)
     return false if obstructed?(x, y, x_des, y_des)
 
