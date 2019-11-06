@@ -124,7 +124,5 @@ RSpec.describe Game, type: :model do
 
       expect(game.turn).to eq('black')
     end
-
-
   end
 end

@@ -30,10 +30,5 @@ RSpec.describe PiecesController, type: :controller do
       expect(piece.x_location).to eq(new_x_location)
       expect(piece.y_location).to eq(new_y_location)
     end
-
-    it 'should return not_found if the piece does not exist' do
-      patch :update, params: { id: 'FAKE_ID' }
-      expect(response).to have_http_status(:not_found)
-    end
   end
 end

@@ -20,6 +20,7 @@ class Piece < ApplicationRecord
       piece_at_destination.capture_piece!
     end
     update_piece_location!(new_x, new_y)
+    game.change_turn!
   end
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
