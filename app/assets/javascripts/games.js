@@ -24,15 +24,14 @@ $(function () {
         dataType: 'json',
       }).then(function() {
         let currentTurn = $('.current-turn').text();
-        console.log(currentTurn);
-
+        
         if (currentTurn === 'White') {
           $('.current-turn').text('Black');
         } else {
           $('.current-turn').text('White');
         }
       }).catch(function() {
-        console.log('Can this revert?')
+        ui.draggable.animate(ui.draggable.data("ui-draggable").originalPosition,"slow");
       });
 
     }
