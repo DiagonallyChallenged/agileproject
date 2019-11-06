@@ -20,6 +20,7 @@ class Piece < ApplicationRecord
       piece_at_destination.capture_piece!
     end
     update_piece_location!(new_x, new_y)
+    game.change_turn!
   end
 
   def movement_direction(x_current, y_current, x_destination, y_destination)
@@ -95,5 +96,11 @@ class Piece < ApplicationRecord
   def piece_on_board(x, y)
     x >= 1 && x <= 8 && y >= 1 && y <= 8
   end
+  # rubocop:enable Naming/UncommunicativeMethodParamName
+
+  def correct_turn?
+    return true if piece_color == game.turn
+
+    false
+  end
 end
-# rubocop:enable Naming/UncommunicativeMethodParamName

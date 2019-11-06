@@ -116,4 +116,13 @@ RSpec.describe Game, type: :model do
       expect(check_status).to be false
     end
   end
+
+  describe 'change_turn!' do
+    it 'should change the turn when called' do
+      game = FactoryBot.create(:game)
+      game.change_turn!
+
+      expect(game.turn).to eq('black')
+    end
+  end
 end
