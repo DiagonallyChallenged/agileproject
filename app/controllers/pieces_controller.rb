@@ -15,8 +15,8 @@ class PiecesController < ApplicationController
 
     return render_not_found if @piece.blank?
 
-    x_des = params[:x_location]
-    y_des = params[:y_location]
+    x_des = params[:x_location].to_i
+    y_des = params[:y_location].to_i
 
     @piece.move_to!(x_des, y_des) if @piece.valid_move?(x_des: x_des, y_des: y_des)
 
