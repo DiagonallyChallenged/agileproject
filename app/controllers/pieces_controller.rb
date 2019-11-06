@@ -4,6 +4,9 @@ class PiecesController < ApplicationController
     return render_not_found if @piece.blank?
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+
   def update
     @piece = Piece.find_by_id(params[:id])
     raise 'InvalidMove' unless @piece.correct_turn?
@@ -23,8 +26,9 @@ class PiecesController < ApplicationController
     end
     redirect_to game_path(@piece.game)
   end
-  # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
+
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -32,6 +36,3 @@ class PiecesController < ApplicationController
     params.permit(:x_location, :y_location)
   end
 end
-
-# rubocop:enable Metrics/MethodLength
-# rubocop:disable Metrics/AbcSize
