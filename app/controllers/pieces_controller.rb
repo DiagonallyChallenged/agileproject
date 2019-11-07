@@ -5,7 +5,6 @@ class PiecesController < ApplicationController
   end
 
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable Metrics/MethodLength
 
   def update
     @piece = Piece.find_by_id(params[:id])
@@ -22,7 +21,6 @@ class PiecesController < ApplicationController
     end
   end
 
-  # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
   private
