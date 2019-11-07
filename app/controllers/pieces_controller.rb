@@ -11,10 +11,6 @@ class PiecesController < ApplicationController
     @piece = Piece.find_by_id(params[:id])
     raise 'InvalidMove' unless @piece.correct_turn?
 
-    @piece.move_to!(params[:x_location], params[:y_location])
-
-    return render_not_found if @piece.blank?
-
     x_des = params[:x_location].to_i
     y_des = params[:y_location].to_i
 
@@ -24,7 +20,6 @@ class PiecesController < ApplicationController
       format.html
       format.json
     end
-    redirect_to game_path(@piece.game)
   end
 
   # rubocop:enable Metrics/MethodLength
