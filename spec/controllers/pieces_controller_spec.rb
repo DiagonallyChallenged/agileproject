@@ -30,5 +30,17 @@ RSpec.describe PiecesController, type: :controller do
       expect(piece.x_location).to eq(new_x_location)
       expect(piece.y_location).to eq(new_y_location)
     end
+
+    it 'should return true if move is valid' do
+      game = Game.create(name: 'New Game')
+      game.populate_game
+      game.reload
+      piece = game.pieces.last
+      new_x_location = piece.x_location + 1
+      new_y_location = piece.y_location + 1
+      piece.move_to!(new_x_location, new_y_location)
+      expect(piece.reload.x_location).to eq(new_x_location)
+      expect(piece.reload.y_location).to eq(new_y_location)
+    end
   end
 end

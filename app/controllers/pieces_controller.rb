@@ -4,17 +4,24 @@ class PiecesController < ApplicationController
     return render_not_found if @piece.blank?
   end
 
+  # rubocop:disable Metrics/AbcSize
+
   def update
     @piece = Piece.find_by_id(params[:id])
     raise 'InvalidMove' unless @piece.correct_turn?
 
-    @piece.move_to!(params[:x_location], params[:y_location])
+    x_des = params[:x_location].to_i
+    y_des = params[:y_location].to_i
+
+    @piece.move_to!(x_des, y_des) if @piece.valid_move?(x_des: x_des, y_des: y_des)
 
     respond_to do |format|
       format.html
       format.json
     end
   end
+
+  # rubocop:enable Metrics/AbcSize
 
   private
 
