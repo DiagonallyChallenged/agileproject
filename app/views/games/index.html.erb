@@ -1,23 +1,29 @@
-<h1>Hello Team - Let's Play Chess!</h1>
+<div class="col-10 offset-1 text-center">  
+  <% if user_signed_in? %>
+    <h1>Welcome, <%= current_user.email %>!</h1>
+    <p><%= link_to 'Create a Game', new_game_path %></p>
+  <% else %> 
+    <h1>Welcome!</h1>
+    <p><%= link_to 'Log in', new_user_session_path %> or <%= link_to 'create an account', new_user_registration_path %> to join and create games!</p>
+  <% end %>
+  <hr /><br />
 
-<p><%= link_to 'Create a Game', new_game_path %></p>
+  <h2>Available Games that need a player:</h2>
 
-
-<h1>Available Games that need a player:</h1>
-
-<% @games.each do |game| %>
-  <div class="container">
-    <div class ='row'>
-      <div class="col-sm-4 col-12 text-center">
-        <p>
-          <h1><%= game.name %></h1>
-        </p>
-        <% if current_user && game.joined?(current_user) %>
-          <%= link_to "You're in, Let's Play!", game_path(game), class: 'btn btn-secondary btn-large'%>
-        <% else %>
-          <%= link_to 'Join a Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
-        <% end %>
+  <% @games.each do |game| %>
+    <div class="container">
+      <div class ='row'>
+        <div class="col-sm-4 col-12 text-center">
+          <p>
+            <h1><%= game.name %></h1>
+          </p>
+          <% if current_user && game.joined?(current_user) %>
+            <%= link_to "You're in, Let's Play!", game_path(game), class: 'btn btn-secondary btn-large'%>
+          <% else %>
+            <%= link_to 'Join a Game!', game_path(game), class: 'btn btn-primary btn-large', method: :put %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
