@@ -34,6 +34,8 @@ gem 'simple_form'
 
 gem 'jquery-ui-rails'
 
+gem 'figaro'
+
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
