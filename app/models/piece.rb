@@ -4,6 +4,12 @@ class Piece < ApplicationRecord
   alias_attribute :x, :x_location
   alias_attribute :y, :y_location
 
+  after_update :notify_piece_change, on: :update
+
+  def notify_piece_change
+    Pusher.trigger('piece', 'update', self.as_json)
+  end
+
   def capture_piece!
     update_attributes(x_location: nil, y_location: nil, active: false)
   end

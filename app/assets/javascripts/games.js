@@ -23,14 +23,9 @@ $(function () {
         data: newLocation,
         dataType: 'json',
       }).then(function() {
-        let currentTurn = $('.current-turn').text();
-        
-        if (currentTurn === 'White') {
-          $('.current-turn').text('Black');
-        } else {
-          $('.current-turn').text('White');
-        }
+        console.log('ok, this is actually working')
       }).catch(function() {
+        console.log('wrong!')
         ui.draggable.animate(ui.draggable.data("ui-draggable").originalPosition,"slow");
       });
 

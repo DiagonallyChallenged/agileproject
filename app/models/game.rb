@@ -10,6 +10,12 @@ class Game < ApplicationRecord
 
   attr_accessor :black_player_id, :white_player_id
 
+  after_update :notify_game_change, on: :update
+
+  def notify_game_change
+    Pusher.trigger('game', 'update', self.as_json)
+  end
+
   def join_game(user, color)
     if color == 'white'
       self.white_player = user
