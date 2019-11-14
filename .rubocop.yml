@@ -114,3 +114,27 @@ Metrics/CyclomaticComplexity:
 Metrics/AbcSize:
   Exclude:
     - 'app/models/piece.rb'
+
+Layout/TrailingBlankLines:
+  Exclude:
+    - 'config/initializers/pusher.rb'
+
+# Ignore these for pusher for not because I need more experience with Pusher!
+# Offense count: 2
+# Cop supports --auto-correct.
+Style/RedundantSelf:
+  Exclude:
+    - 'app/models/game.rb'
+    - 'app/models/piece.rb'
+
+# Offense count: 4
+# Cop supports --auto-correct.
+# Configuration parameters: EnforcedStyle, ConsistentQuotesInMultiline.
+# SupportedStyles: single_quotes, double_quotes
+Style/StringLiterals:
+  Exclude:
+    - 'bin/yarn'
+    - 'config/environments/production.rb'
+    - 'config/puma.rb'
+    - 'test/application_system_test_case.rb'
+    - 'config/initializers/pusher.rb'
