@@ -35,7 +35,7 @@ function movePiece(piece) {
     var newPiece = $('<div/>', { 'class' : 'piece', 'data-type': type, 'data-color': color  });
     pieceChanged.remove();
     newPiece.appendTo(newSquare);
-    newPiece..draggable({
+    newPiece.draggable({
       snap: '.square',
       revert: 'invalid'
     });
