@@ -1,0 +1,46 @@
+Pusher.logToConsole = true;
+
+var pusher = new Pusher("<%= ENV['pusher_key'] %>", {
+  cluster: "<%= ENV['pusher_cluster'] %>",
+  encrypted: true
+});
+var game_channel = pusher.subscribe('game');
+game_channel.bind('update',
+  function(data) {
+    changeTurn(data.turn);
+  }
+);
+
+var piece_channel = pusher.subscribe('piece');
+piece_channel.bind('update',
+  function(data) {
+    movePiece(data);
+  }
+);
+
+function changeTurn(turn) {
+  var color = turn.charAt(0).toUpperCase() + turn.slice(1);
+  $('.current-turn').text(color);
+}
+
+function movePiece(piece) {
+  var pieceChanged = $(`[data-piece-id='${piece.id}']`);
+  if (piece.x_location === null && piece.y_location === null) {
+    pieceChanged.remove();
+    console.log('removed!');
+  } else {
+    var color = pieceChanged.data("color");
+    var type = pieceChanged.data("type");
+    var newSquare = $(`[data-x='${piece.x_location}'][data-y='${piece.y_location}']`);
+    var newPiece = $('<div/>', { 'class' : 'piece', 'data-type': type, 'data-color': color  });
+    pieceChanged.remove();
+    newPiece.appendTo(newSquare);
+    newPiece..draggable({
+      snap: '.square',
+      revert: 'invalid'
+    });
+
+    //pieceChanged.appendTo(newSquare);
+    console.log('moved!')
+  }
+}
